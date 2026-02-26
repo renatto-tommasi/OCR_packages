@@ -190,6 +190,27 @@ After installation:
 - Open Android Studio and install missing SDK packages.
 - Run `flutter doctor` to identify missing components.
 
+### Build failed due to deleted Android v1 embedding
+
+This project uses Android v2 embedding. If you still see this error, check these points:
+
+- `MainActivity` must extend `io.flutter.embedding.android.FlutterActivity` (not `io.flutter.app.FlutterActivity`).
+- Ensure your Android entrypoint exists at:
+  - `android/app/src/main/kotlin/com/example/ocr_packages/MainActivity.kt`
+- If your local `android/` folder was generated earlier with old templates, regenerate platform files safely:
+
+```bash
+flutter create .
+flutter pub get
+```
+
+Then reapply custom manifest permission entries if needed and run:
+
+```bash
+flutter clean
+flutter run
+```
+
 ---
 
 ## 9) Optional: Build and install App Bundle (Play Store)
